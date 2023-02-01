@@ -68,20 +68,22 @@ const getSellOffers = async (start = 0, k = 0) => {
     }
 
     const nfts = [];
-    try{
-        const _nfts = await peerplaysService.getBlockchainData({
-            api: 'database',
-            method: 'get_objects',
-            'params[0][]': params
-        });
-        nfts.push(..._nfts);
-    }catch(ex){
-        console.error(ex);
+    if(params.length > 0){
+        try{
+            const _nfts = await peerplaysService.getBlockchainData({
+                api: 'database',
+                method: 'get_objects',
+                'params[0][]': params
+            });
+            nfts.push(..._nfts.result);
+        }catch(ex){
+            console.error(ex);
+        }
     }
 
     if(nfts){
         for(let i = 0; i < result.length; i++){
-            result[i].nft_metadata_ids = nfts.result.filter((nft) => result[i].item_ids.includes(nft.id)).map(({ nft_metadata_id }) => nft_metadata_id);
+            result[i].nft_metadata_ids = nfts.filter((nft) => result[i].item_ids.includes(nft.id)).map(({ nft_metadata_id }) => nft_metadata_id);
 
             result[i].minimum_price.amount = result[i].minimum_price.amount / Math.pow(10, config.peerplaysAssetPrecision);
             result[i].maximum_price.amount = result[i].maximum_price.amount / Math.pow(10, config.peerplaysAssetPrecision);
@@ -238,11 +240,15 @@ router.get('/customer/products/:page?', async (req, res, next) => {
             });
         }
 
-        const metadatas = await peerplaysService.getBlockchainData({
-            api: 'database',
-            method: 'get_objects',
-            'params[0][]': _.uniq(allTokens.result.map((t) => t.nft_metadata_id))
-        });
+        let metadatas;
+
+        if(allTokens.result && allTokens.result.length > 0){
+            metadatas = await peerplaysService.getBlockchainData({
+                api: 'database',
+                method: 'get_objects',
+                'params[0][]': _.uniq(allTokens.result.map((t) => t.nft_metadata_id))
+            });
+        }
 
         await Promise.all(allTokens.result.map(async (token) => {
             const metadata = metadatas.result.find((metadata) => metadata.id === token.nft_metadata_id);
@@ -1060,18 +1066,18 @@ router.post('/admin/product/deleteimage', restrict, checkAccess, async (req, res
         res.status(400).json({ message: 'Product not found' });
         return;
     }
+    // Check for main image being deleted
     if(req.body.productImage === product.productImage){
         // set the productImage to null
         await db.products.updateOne({ _id: getId(req.body.product_id) }, { $set: { productImage: null } }, { multi: false });
-
-        // remove the image from disk
-        fs.unlink(path.join('public', req.body.productImage), (err) => {
-            if(err){
-                res.status(400).json({ message: 'Image not removed, please try again.' });
-            }else{
-                res.status(200).json({ message: 'Image successfully deleted' });
-            }
-        });
+    }
+        // Check if image is a URL
+    if(req.body.productImage.substring(0, 4) === 'http'){
+        // Remove image URL from list
+        const imageList = product.productImages.filter((item) => item !== req.body.productImage);
+        // Update image list to DB
+        await db.products.updateOne({ _id: getId(req.body.product_id) }, { $set: { productImages: imageList } }, { multi: false });
+        res.status(200).json({ message: 'Image successfully deleted' });
     }else{
         // remove the image from disk
         fs.unlink(path.join('public', req.body.productImage), (err) => {

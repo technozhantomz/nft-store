@@ -62,12 +62,16 @@ const getAllOfferHistory = async (start = 0) => {
   for(let i = 0; i < result.length; i++){
       params.push(...result[i].item_ids);
   }
+  
+  let nfts;
 
-  const nfts = await peerplaysService.getBlockchainData({
-      api: 'database',
-      method: 'get_objects',
-      'params[0][]': params
-  });
+  if(params.length > 0){
+    nfts = await peerplaysService.getBlockchainData({
+        api: 'database',
+        method: 'get_objects',
+        'params[0][]': params
+    });
+  }
 
   if(nfts){
       for(let i = 0; i < result.length; i++){
@@ -330,13 +334,13 @@ router.get('/admin/dashboard', csrfProtection, restrict, async (req, res) => {
     const allProductsInDB = await db.products.find({}).toArray();
     const nftMetadataIds = allProductsInDB.map(({nftMetadataID}) => nftMetadataID);
 
-    const metadatas = await peerplaysService.getBlockchainData({
-        api: 'database',
-        method: 'get_objects',
-        'params[0][]': nftMetadataIds
-    });
-
     if(nftMetadataIds && nftMetadataIds.length > 0) {
+        const metadatas = await peerplaysService.getBlockchainData({
+            api: 'database',
+            method: 'get_objects',
+            'params[0][]': nftMetadataIds
+        });
+    
         const offerHistories = await getAllOfferHistory();
 
         if(offerHistories && offerHistories.length > 0) {
@@ -858,6 +862,54 @@ router.delete('/admin/settings/discount/delete', restrict, checkAccess, async (r
         return;
     }catch(ex){
         res.status(400).json({ message: 'Error deleting discount code. Please try again.' });
+    }
+});
+
+// Add image by URL
+router.post('/admin/file/url', restrict, checkAccess, async (req, res) => {
+    const db = req.app.db;
+
+    // get the product form the DB
+    const product = await db.products.findOne({ _id: getId(req.body.productId) });
+    if(!product){
+        // Return error
+        res.status(400).json({ message: 'Image error. Please try again.' });
+        return;
+    }
+
+    // Check image URL already in list
+    if(product.productImages){
+        if(product.productImages.includes(req.body.imageUrl)){
+            res.status(400).json({ message: 'Image error. Image with that URL already exists.' });
+            return;
+        }
+    }
+
+    // Check image URL already set as main image
+    if(product.productImage === req.body.imageUrl){
+        res.status(400).json({ message: 'Image error. Image with that URL already exists.' });
+        return;
+    }
+
+    // Check productImages and init
+    if(!product.productImages){
+        product.productImages = [];
+    }
+    // Add the image to our images
+    product.productImages.push(req.body.imageUrl);
+
+    try{
+        // if there isn't a product featured image, set this one
+        if(!product.productImage){
+            await db.products.updateOne({ _id: getId(req.body.productId) }, { $set: { productImage: req.body.imageUrl } }, { multi: false });
+        }
+
+        // Add the images
+        await db.products.updateOne({ _id: getId(req.body.productId) }, { $set: { productImages: product.productImages } }, { multi: false });
+        res.status(200).json({ message: 'Image added successfully' });
+    }catch(ex){
+        console.log('Failed to upload the file', ex);
+        res.status(400).json({ message: 'Image error. Please try again.' });
     }
 });
 

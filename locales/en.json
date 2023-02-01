@@ -244,5 +244,9 @@
 	"Customer Email": "Customer Email",
 	"Request Date": "Request Date",
 	"NFTs purchased": "NFTs purchased",
-	"Cancel": "Cancel"
+	"Cancel": "Cancel",
+	"Update order": "Update order",
+	"Add image URL": "Add image URL",
+	"Product image URL": "Product image URL",
+	"Upload image file": "Upload image file"
 }
