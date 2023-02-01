@@ -7,7 +7,7 @@ $(document).ready(function (){
         var stripe = Stripe($('#stripePublicKey').val());
         var elements = stripe.elements();
         var style = {
-            hidePostalCode: true,
+            hidePostalCode: true, 
             base: {
                 color: '#32325d',
                 fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
