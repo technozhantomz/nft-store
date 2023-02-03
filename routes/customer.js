@@ -10,7 +10,8 @@ const {
     getCountryList,
     mongoSanitize,
     sendEmail,
-    clearCustomer
+    clearCustomer,
+    sanitize
 } = require('../lib/common');
 const rateLimit = require('express-rate-limit');
 const { indexCustomers } = require('../lib/indexing');
@@ -66,23 +67,23 @@ router.post('/customer/create', async (req, res) => {
         });
         return;
     }
-    if(req.body.phone && !req.body.phone.match(/^[0-9]{10}$/)){
-        res.status(400).json({
-            message: 'Mobile should contain a number and 10 digit only.'
-        });
-        return;
-    }
+    // if (req.body.phone && !req.body.phone.match(/^[0-9]{10}$/)) {
+    //     res.status(400).json({
+    //         message: 'Mobile should contain a number and 10 digit only.'
+    //     });
+    //     return;
+    // }
     const customerObj = {
-        email: req.body.email,
-        company: req.body.company,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        address1: req.body.address1,
-        address2: req.body.address2,
-        country: req.body.country,
-        state: req.body.state,
-        postcode: req.body.postcode,
-        phone: req.body.phone,
+        email: sanitize(req.body.email),
+        company: sanitize(""),
+        firstName: sanitize(""),
+        lastName: sanitize(""),
+        address1: sanitize(""),
+        address2: sanitize(""),
+        country: sanitize(""),
+        state: sanitize(""),
+        postcode: sanitize(""),
+        phone: sanitize(""),
         password: bcrypt.hashSync(req.body.password, 10),
         created: new Date()
     };

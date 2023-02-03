@@ -1,7 +1,7 @@
 {
-    "name": "NFT Store",
-    "description": "A fully functioning Node.js shopping cart with Stripe, PayPal and Authorize.net payments.",
-    "repository": "https://gitlab.com/PBSA/dapps/NFT-store",
+    "name": "ExpressNFT",
+    "description": "Run your own NFT marketplace on the Peerplays blockchain. Based on a fork of ExpressCart",
+    "repository": "https://gitlab.com/PBSA/dapps/ExpressNFT",
     "logo": "https://raw.githubusercontent.com/mrvautin/expressCart/master/public/images/logo.png",
     "keywords": [
         "Shopping cart",

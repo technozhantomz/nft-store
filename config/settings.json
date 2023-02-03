@@ -56,7 +56,7 @@
     "peerplaysAssetSymbol": "KSH",
     "peerplaysAssetPrecision": 5,
     "peerplaysAccountID": "1.2.39",
-    "ppyExchangeRate": 0.2,
+    "ppyExchangeRate": 0.0081,
     "commission": 10,
     "categories": ["Digital Art", "Photographs", "Oil Paintings", "Collectibles", "Fashion", "Games"]
 }
