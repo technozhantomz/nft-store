@@ -1,7 +1,7 @@
 {
-  "name": "NFT-Store",
-  "version": "0.1.0",
-  "description": "A fully functioning Node.js shopping cart with Stripe, PayPal and Authorize.net payments.",
+  "name": "ExpressNFT",
+  "version": "1.0.0",
+    "description": "Run your own NFT marketplace on the Peerplays blockchain. Based on a fork of ExpressCart",
   "private": false,
   "scripts": {
     "start": "nodemon --inspect app.js",
@@ -23,10 +23,9 @@
     }
   },
   "engines": {
-    "node": "10.16.0"
+    "node": ">=10.16.0"
   },
   "dependencies": {
-    "@adyen/api-library": "^2.1.7",
     "ajv": "^6.10.2",
     "ajv-errors": "^1.0.1",
     "async": "^2.6.3",
@@ -114,13 +113,13 @@
     "westpac"
   ],
   "author": "Peerplays",
-  "homepage": "https://gitlab.com/PBSA/dapps/NFT-store",
+  "homepage": "https://gitlab.com/PBSA/dapps/ExpressNFT",
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/PBSA/dapps/NFT-store"
+    "url": "git+https://gitlab.com/PBSA/dapps/ExpressNFT"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/PBSA/dapps/NFT-store/-/issues"
+    "url": "https://gitlab.com/PBSA/dapps/ExpressNFT/-/issues"
   }
 }
