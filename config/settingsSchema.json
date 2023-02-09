@@ -2,11 +2,11 @@
     "properties": {
         "cartTitle": {
             "type": "string",
-            "default": "Blockchain Shop"
+            "default": "NFT Store"
         },
         "cartDescription": {
             "type": "string",
-            "default": "This is my Blockchain Shop"
+            "default": "This is my NFT Store"
         },
         "cartLogo": {
             "type": "string"
@@ -14,7 +14,7 @@
         "baseUrl": {
             "type": "string",
             "format": "uri-template",
-            "default": "https://market.homepesa.org"
+            "default": "http://localhost:1111"
         },
         "emailHost": {
             "format": "uri-template",
@@ -48,7 +48,7 @@
         },
         "footerHtml": {
             "type": "string",
-            "default": "&lt;h4 class=&quot;text-center&quot;&gt;Powered by Blockchain tech&lt;/h4&gt;"
+            "default": "&lt;h4 class=&quot;text-center&quot;&gt;Powered by Peerplays&lt;/h4&gt;"
         },
         "googleAnalytics": {
             "type": "string"
@@ -103,6 +103,10 @@
                     {
                         "type": "string",
                         "enum": [ "zip"]
+                    },
+                    {
+                        "type": "string",
+                        "enum": [ "verifone"]
                     }
                 ]
             }

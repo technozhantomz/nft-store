@@ -1,14 +1,14 @@
 {
     "cartTitle": "Blockchain Shop",
     "cartDescription": "expressCart",
-    "cartLogo": "",
+    "cartLogo": "http://localhost:1111/logo3.png",
     "baseUrl": "http://localhost:1111",
-    "emailHost": "smtp-mail.outlook.com",
+    "emailHost": "smtp.gmail.com",
     "emailPort": 587,
     "emailSecure": false,
-    "emailUser": "hi@maroffat.com",
-    "emailPassword": "this_ishe_smtp_password",
-    "emailAddress": "hi@maroffat.com",
+    "emailUser": "extraqa@gmail.com",
+    "emailPassword": "humqecakvwebtddj",
+    "emailAddress": "extraqa@gmail.com",
     "productsPerRow": 3,
     "productsPerPage": 6,
     "footerHtml": "&lt;h4 class=&quot;text-center&quot;&gt;Powered by blockchain tech.&lt;/h4&gt;",
@@ -18,12 +18,12 @@
     "currencySymbol": "$",
     "currencyISO": "USD",
     "paymentGateway": [
-        "stripe" 
+        "stripe"
     ],
     "databaseConnectionString": "mongodb://localhost:27017/expresscart",
     "theme": "Cloth",
     "trackStock": false,
-    "orderHook": "",    
+    "orderHook": "",
     "availableLanguages": [
         "en",
         "it"
@@ -48,15 +48,26 @@
     },
     "showRelatedProducts": true,
     "showHomepageVariants": false,
-    "peeridUrl": "https://pid.homepesa.org/api/v1/",
+    "peeridUrl": "http://localhost:3001/api/v1/",
     "peeridClientID": "1",
-    "peeridClientSecret": "ufaufgxO3FiI0HPSB3YY3fKgYJiwi4Dko7fbkmpAkR",
-    "peeridRedirectUri": "https://market.homepesa.org/peerid_auth/redirect",
+    "peeridClientSecret": "pJfId2vUvG5pyBWnFGd5fxXw3kdILtd4teLyeNd7BR",
+    "peeridRedirectUri": "http://localhost:8082/peerid_auth/redirect",
     "peerplaysAssetID": "1.3.0",
     "peerplaysAssetSymbol": "KSH",
     "peerplaysAssetPrecision": 5,
-    "peerplaysAccountID": "1.2.39",
-    "ppyExchangeRate": 0.0081,
+    "peerplaysAccountID": "1.2.18",
+    "ppyExchangeRate": 0.81,
     "commission": 10,
-    "categories": ["Digital Art", "Photographs", "Oil Paintings", "Collectibles", "Fashion", "Games"]
+    "categories": [
+        "Digital Art",
+        "Photographs",
+        "Oil Paintings",
+        "Collectibles",
+        "Fashion",
+        "Games"
+    ],
+    "secretCookie": "1d458ebfa8600ff842b56809dbd73a6733979ee1",
+    "secretSession": "687b1f022230d59bc4669ef397c6e66c658716b5",
+    "themeViews": "../views/themes/Cloth/",
+    "env": ""
 }
