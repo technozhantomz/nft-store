@@ -113,11 +113,11 @@
     color: #fff;
 }
 .nft-store-text-style h1{
-    color: #084AC2;
-    font-size: 47px;
+    color: #cca01d;
+    font-size: 50px;
 }
 .text-blue {
-    color: #1685FB;
+    color: #4fa886;
 }
 .font-normal {
     font-weight: 400;
@@ -138,7 +138,7 @@
     padding-right: 65px;
 }
 .customer-header h2 {
-    color: #707070;
+    color: #effcff;
     font-size: 30px;
 }
 .first-input-space {
@@ -212,20 +212,6 @@
     }
     .control-form-bottom-align {
         padding-top: 0px;
-    }
-}
-@media (min-width:210px) and (max-width:767px) {
-    .mobile-view-none {
-        display: none;
-    }
-    .left-right-align {
-        border: none;
-    }
-    .mobile-direction {
-        flex-direction: column-reverse;
-    }
-    .login-fullscreen {
-        min-height: calc(100vh - 100px);
     }
 }
 @media (min-width:767px) and (max-width:1024px) {
