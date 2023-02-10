@@ -6,4 +6,4 @@ data/
 env.yaml
 ecosystem.config.js
 bin/googleproducts.xml
-uploads/*
+
