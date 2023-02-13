@@ -359,7 +359,7 @@ if(!config.secretSession || config.secretSession === ''){
 
 app.enable('trust proxy');
 app.use(helmet());
-app.set('port', process.env.PORT || 1111);
+app.set('port', process.env.PORT || 2222);
 app.use('/imgs', express.static(path.join(__dirname, 'uploads')));
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
